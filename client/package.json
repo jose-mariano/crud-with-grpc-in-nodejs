@@ -1,0 +1,16 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "José Mariano",
+  "license": "ISC",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.4.2",
+    "@grpc/proto-loader": "^0.6.6"
+  }
+}
