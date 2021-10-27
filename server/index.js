@@ -21,6 +21,9 @@ const UserService = grpc.loadPackageDefinition(userPackageDefinition).UserServic
 const server = new grpc.Server();
 
 server.addService(UserService.service, {
+  getUsers: (call, callback) => {
+    return callback(null, { users })
+  },
   getUserById: (call, callback) => {
     const { id } = call.request
 

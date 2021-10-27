@@ -1,5 +1,18 @@
 syntax = "proto3";
 
+message User {
+  int32 id = 1;
+  string name = 2;
+  string email = 3;
+  string password = 4;
+}
+
+message Empty {}
+
+message ResponseUsers {
+  repeated User users = 1;
+}
+
 message RequestUserById {
   int32 id = 1;
 }
@@ -8,13 +21,7 @@ message ResponseUserById {
   User user = 1;
 }
 
-message User {
-  int32 id = 1;
-  string name = 2;
-  string email = 3;
-  string password = 4;
-}
-
 service UserService {
+  rpc getUsers (Empty) returns (ResponseUsers) {}
   rpc getUserById (RequestUserById) returns (ResponseUserById) {}
 }
