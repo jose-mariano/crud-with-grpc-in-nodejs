@@ -1,5 +1,6 @@
 const grpc = require('@grpc/grpc-js')
 const protoLoader = require('@grpc/proto-loader')
+const { NotFoundError } = require('./GrpcErrors')
 const path = require('path')
 
 const host = '127.0.0.1'
@@ -10,12 +11,6 @@ const users = [
   { id: 2, name: 'No One', email: 'no.one@test.com', password: 'no1234one' }
 ]
 
-function grpcError(status, message) {
-  const error = new Error(message)
-  error.code = status
-
-  return error
-}
 
 const userPackageDefinition = protoLoader.loadSync(
   path.resolve('users.proto')
@@ -33,14 +28,12 @@ server.addService(UserService.service, {
       const user = users[id - 1]
 
       if (!user) {
-        throw new Error('User not found')
+        throw new NotFoundError('User not found')
       }
 
       return callback(null, { user })
     } catch (error) {
-      return callback(
-        grpcError(grpc.status.NOT_FOUND, error.message)
-      )
+      return callback(error)
     }
   }
 })
