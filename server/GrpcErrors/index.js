@@ -1,4 +1,5 @@
 module.exports = {
   BaseError: require('./BaseError'),
-  NotFoundError: require('./NotFoundError')
+  NotFoundError: require('./NotFoundError'),
+  InvalidArgumentError: require('./InvalidArgumentError')
 }
