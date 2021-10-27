@@ -12,11 +12,21 @@ const userPackageDefinition = protoLoader.loadSync(
 const UserService = grpc.loadPackageDefinition(userPackageDefinition).UserService
 
 const server = new UserService(`${host}:${port}`, grpc.credentials.createInsecure())
-server.getUserById({ id: 1 }, (error, user) => {
+
+server.getUsers({}, (error, result) => {
   if (error) {
     console.log(error.message)
     return
   }
 
-  console.log(user)
+  console.table(result.users)
+})
+
+server.getUserById({ id: 1 }, (error, result) => {
+  if (error) {
+    console.log(error.message)
+    return
+  }
+
+  console.log(result)
 })
