@@ -13,6 +13,19 @@ const UserService = grpc.loadPackageDefinition(userPackageDefinition).UserServic
 
 const server = new UserService(`${host}:${port}`, grpc.credentials.createInsecure())
 
+server.addUser({
+  name: 'Alexandre',
+  email: 'alexandre@test.com',
+  password: 'alexandre123'
+}, (error, result) => {
+  if (error) {
+    console.log(error.message)
+    return
+  }
+
+  console.log(result)
+})
+
 server.getUsers({}, (error, result) => {
   if (error) {
     console.log(error.message)
