@@ -31,8 +31,13 @@ message ResponseAddUser {
   User user = 1;
 }
 
+message RequestDelUser {
+  int32 id = 1;
+}
+
 service UserService {
   rpc getUsers (Empty) returns (ResponseUsers) {}
   rpc getUserById (RequestUserById) returns (ResponseUserById) {}
   rpc addUser (RequestAddUser) returns (ResponseAddUser) {}
+  rpc delUser (RequestDelUser) returns (Empty) {}
 }

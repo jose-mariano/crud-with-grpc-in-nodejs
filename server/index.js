@@ -61,6 +61,22 @@ server.addService(UserService.service, {
     } catch (error) {
       return callback(error)
     }
+  },
+  delUser: (call, callback) => {
+    const { id } = call.request
+
+    try {
+      const userIndex = id - 1
+
+      if (!users[userIndex]) {
+        throw new NotFoundError('User not found')
+      }
+
+      users.splice(userIndex, 1)
+      return callback(null, {})
+    } catch (error) {
+      return callback(error)
+    }
   }
 })
 
