@@ -26,6 +26,13 @@ server.addUser({
   console.log(result)
 })
 
+server.delUser({ id: 2 }, (error, result) => {
+  if (error) {
+    console.log(error.message)
+    return
+  }
+})
+
 server.getUsers({}, (error, result) => {
   if (error) {
     console.log(error.message)
