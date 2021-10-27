@@ -1,6 +1,6 @@
 const grpc = require('@grpc/grpc-js')
 const protoLoader = require('@grpc/proto-loader')
-const { NotFoundError } = require('./GrpcErrors')
+const { NotFoundError, InvalidArgumentError } = require('./GrpcErrors')
 const path = require('path')
 
 const host = '127.0.0.1'
@@ -35,6 +35,29 @@ server.addService(UserService.service, {
       }
 
       return callback(null, { user })
+    } catch (error) {
+      return callback(error)
+    }
+  },
+  addUser: (call, callback) => {
+    const { name, email, password } = call.request
+    const newUser = {
+      name,
+      email,
+      password
+    }
+
+    try {
+      Object.keys(newUser).forEach((field) => {
+        if (!newUser[field]) {
+          throw new InvalidArgumentError(`${field} field is undefined`)
+        }
+      })
+
+      newUser.id = users.length + 1
+
+      users.push(newUser)
+      return callback(null, { user: newUser })
     } catch (error) {
       return callback(error)
     }

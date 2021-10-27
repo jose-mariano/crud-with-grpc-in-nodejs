@@ -21,7 +21,18 @@ message ResponseUserById {
   User user = 1;
 }
 
+message RequestAddUser {
+  string name = 1;
+  string email = 2;
+  string password = 3;
+}
+
+message ResponseAddUser {
+  User user = 1;
+}
+
 service UserService {
   rpc getUsers (Empty) returns (ResponseUsers) {}
   rpc getUserById (RequestUserById) returns (ResponseUserById) {}
+  rpc addUser (RequestAddUser) returns (ResponseAddUser) {}
 }
