@@ -26,6 +26,20 @@ server.addUser({
   console.log(result)
 })
 
+server.updateUser({
+  id: 3,
+  name: 'Lucas Silva',
+  email: 'lucas.silva@test.com',
+  password: 'silva1234'
+}, (error, result) => {
+  if (error) {
+    console.log(error.message)
+    return
+  }
+
+  console.log(result)
+})
+
 server.delUser({ id: 2 }, (error, result) => {
   if (error) {
     console.log(error.message)
