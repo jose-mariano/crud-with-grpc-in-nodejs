@@ -62,6 +62,27 @@ server.addService(UserService.service, {
       return callback(error)
     }
   },
+  updateUser: (call, callback) => {
+    const { id, name, email, password } = call.request
+
+    try {
+      const userIndex = id - 1
+      const user = users[userIndex]
+
+      if (!user) {
+        throw new NotFoundError('User not found')
+      }
+
+      user.name = name
+      user.email = email
+      user.password = password
+
+      users[userIndex] = user
+      return callback(null, { user })
+    } catch (error) {
+      return callback(error)
+    }
+  },
   delUser: (call, callback) => {
     const { id } = call.request
 

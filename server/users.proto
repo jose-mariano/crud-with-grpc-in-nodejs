@@ -31,6 +31,17 @@ message ResponseAddUser {
   User user = 1;
 }
 
+message RequestUpdateUser {
+  int32 id = 1;
+  string name = 2;
+  string email = 3;
+  string password = 4;
+}
+
+message ResponseUpdateUser {
+  User user = 1;
+}
+
 message RequestDelUser {
   int32 id = 1;
 }
@@ -39,5 +50,6 @@ service UserService {
   rpc getUsers (Empty) returns (ResponseUsers) {}
   rpc getUserById (RequestUserById) returns (ResponseUserById) {}
   rpc addUser (RequestAddUser) returns (ResponseAddUser) {}
+  rpc updateUser (RequestUpdateUser) returns (ResponseUpdateUser) {}
   rpc delUser (RequestDelUser) returns (Empty) {}
 }
